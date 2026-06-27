@@ -143,9 +143,11 @@ impl Device {
                                     continue;
                                 }
 
-                                let item =
-                                    control::MenuItem::try_from((control.typ, v4l2_menu)).unwrap();
-                                items.push((v4l2_menu.index, item));
+                                if let Ok(item) =
+                                    control::MenuItem::try_from((control.typ, v4l2_menu))
+                                {
+                                    items.push((v4l2_menu.index, item));
+                                }
                             }
 
                             control.items = Some(items);
